@@ -1,3 +1,6 @@
 [submodule "Types"]
 	path = Types
 	url = https://github.com/MeetXTelegram/Types
+[submodule "rapidjson"]
+	path = rapidjson
+	url = https://github.com/Tencent/rapidjson

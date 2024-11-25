@@ -1,6 +1,7 @@
 #pragma once
 
 #include <csignal>
+#include <memory>
 #include <variant>
 
 #include <pqxx/pqxx>
@@ -8,7 +9,7 @@
 
 #include <User.hpp>
 
-void initDB(const std::string& name, pqxx::connection& db);
+void initDB(const std::string& name, std::shared_ptr<pqxx::connection> db);
 void addUser(User& user);
 void removeUser(std::variant<std::int64_t, User&> identificator, pqxx::connection& db);
 User getUser(std::variant<std::uint64_t, User&> identificator, pqxx::connection& db);

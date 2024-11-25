@@ -1,12 +1,12 @@
 #include <PSQLWrapper.hpp>
 
-void initDB(const std::string& name, pqxx::connection& db) {
-    if (!db.is_open()) {
-        spdlog::get("PSQL")->log(spdlog::level::critical, "Init db error: db is not opened");
+void initDB(const std::string& name, std::shared_ptr<pqxx::connection> db) {
+    if (!db || !db->is_open()) {
+        spdlog::get("PSQL")->log(spdlog::level::critical, "Init db error: db is not opened/not created(shared_ptr)");
         std::raise(SIGUSR1);
     }
     try {
-        pqxx::work w(db);
+        pqxx::work w(*db);
         w.exec("CREATE TABLE IF NOT EXISTS users ("
                "id BIGINT PRIMARY KEY NOT NULL,"
                "tgFirstName VARCHAR,"
