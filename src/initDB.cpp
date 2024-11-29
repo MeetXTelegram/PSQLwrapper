@@ -13,7 +13,6 @@ void initDB(const std::string& name, std::shared_ptr<pqxx::connection> db) {
                "tgLastName VARCHAR,"
                "username VARCHAR NOT NULL,"
                "name VARCHAR,"
-               "country VARCHAR,"
                "city VARCHAR,"
                "age SMALLINT DEFAULT 0,"
                "bio TEXT,"

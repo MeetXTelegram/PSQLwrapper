@@ -10,13 +10,12 @@ include(GNUInstallDirs)
 
 find_package(spdlog REQUIRED)
 find_package(PostgreSQL REQUIRED)
-find_package(libpqxx REQUIRED)
 
-add_subdirectory(rapidjson)
+add_subdirectory(json)
 
+include_directories(json/include)
 include_directories(include)
 include_directories(Types)
-include_directories(rapidjson/include)
 
 add_library(PSQLWrapper SHARED 
     include/PSQLWrapper.hpp
@@ -30,4 +29,4 @@ install(TARGETS PSQLWrapper
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
-target_link_libraries(PSQLWrapper PRIVATE ${PostgreSQL_LIBRARY} libpqxx::pqxx spdlog::spdlog rapidjson)
+target_link_libraries(PSQLWrapper PRIVATE ${PostgreSQL_LIBRARY} libpqxx.so spdlog::spdlog nlohmann_json::nlohmann_json)
