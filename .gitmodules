@@ -4,6 +4,3 @@
 [submodule "json"]
 	path = json
 	url = https://github.com/nlohmann/json
-[submodule "Definitions"]
-	path = Definitions
-	url = https://github.com/MeetXTelegram/Definitions
