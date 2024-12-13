@@ -12,12 +12,11 @@ find_package(spdlog REQUIRED)
 find_package(PostgreSQL REQUIRED)
 
 add_subdirectory(json)
-add_subdirectory(Definitions)
 
 include_directories(json/include)
 include_directories(include)
 include_directories(Types)
-include_directories(Definitions/include)
+include_directories(external/include)
 
 add_library(PSQLWrapper SHARED 
     include/PSQLWrapper.hpp
@@ -25,6 +24,10 @@ add_library(PSQLWrapper SHARED
     src/removeUser.cpp
     src/updateUser.cpp
     src/getUser.cpp
+    external/include/Definitions.hpp
+    external/src/createLogger.cpp
+    external/src/SIGUSR1Handler.cpp
+    external/src/TerminateHandler.cpp
 )
 
 install(TARGETS PSQLWrapper
