@@ -3,7 +3,7 @@
 #include <pqxx/pqxx>
 #include <spdlog/spdlog.h>
 
-#include <Definitions.hpp>
+namespace db { extern std::shared_ptr<pqxx::connection> database; }
 
 void updateUser(User& user) {
     pqxx::work w(*db::database);

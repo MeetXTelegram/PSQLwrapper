@@ -17,7 +17,6 @@ add_subdirectory(json)
 include_directories(json/include)
 include_directories(include)
 include_directories(Types)
-include_directories(external/include)
 
 add_library(PSQLWrapper STATIC
     include/PSQLWrapper.hpp
@@ -25,14 +24,10 @@ add_library(PSQLWrapper STATIC
     src/removeUser.cpp
     src/updateUser.cpp
     src/getUser.cpp
-    external/include/Definitions.hpp
-    external/src/createLogger.cpp
-    external/src/SIGUSR1Handler.cpp
-    external/src/TerminateHandler.cpp
 )
 
 install(TARGETS PSQLWrapper
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
-target_link_libraries(PSQLWrapper PRIVATE ${PostgreSQL_LIBRARY} libpqxx::pqxx spdlog::spdlog nlohmann_json::nlohmann_json Definitions)
+target_link_libraries(PSQLWrapper PRIVATE ${PostgreSQL_LIBRARY} libpqxx::pqxx spdlog::spdlog nlohmann_json::nlohmann_json)
