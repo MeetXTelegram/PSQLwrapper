@@ -26,8 +26,9 @@ add_library(PSQLWrapper STATIC
     src/getUser.cpp
 )
 
+target_link_libraries(PSQLWrapper PRIVATE ${PostgreSQL_LIBRARY} libpqxx::pqxx spdlog::spdlog nlohmann_json::nlohmann_json)
+
 install(TARGETS PSQLWrapper
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
-
-target_link_libraries(PSQLWrapper PRIVATE ${PostgreSQL_LIBRARY} libpqxx::pqxx spdlog::spdlog nlohmann_json::nlohmann_json)
+install(FILES include/PSQLWrapper.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/PSQLWrapper)
