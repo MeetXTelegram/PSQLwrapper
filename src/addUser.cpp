@@ -5,7 +5,7 @@
 #include <pqxx/pqxx>
 #include <spdlog/spdlog.h>
 
-#include <Definitions.hpp>
+namespace db { extern std::shared_ptr<pqxx::connection> database; }
 
 AddUserResult addUser(User& user) {
     if (!db::database) {
@@ -14,7 +14,7 @@ AddUserResult addUser(User& user) {
     }
 
     pqxx::work w(*db::database);
-    pqxx::result res = w.exec_params("SELECT * FROM users WHERE id = $1", user.id);
+    pqxx::result res = w.exec("SELECT * FROM users WHERE id = $1", user.id);
     if (!res.empty()) {
         spdlog::get("PSQL")->log(spdlog::level::warn, "Failed to add user: it looks like the user with id {} already exists (use the updateUserInfo to update the information)", user.id);
         return AddUserResult::ALREADY_EXISTS;

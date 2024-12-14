@@ -5,7 +5,7 @@
 #include <pqxx/pqxx>
 #include <spdlog/spdlog.h>
 
-#include <Definitions.hpp>
+namespace db { extern std::shared_ptr<pqxx::connection> database; }
 
 void removeUser(std::variant<std::int64_t, User> identificator) {
     std::int64_t id = (std::holds_alternative<std::int64_t>(identificator) ? std::get<std::int64_t>(identificator) : std::get<User>(identificator).id);

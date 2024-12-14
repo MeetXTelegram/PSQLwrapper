@@ -5,7 +5,7 @@
 #include <pqxx/pqxx>
 #include <spdlog/spdlog.h>
 
-#include <Definitions.hpp>
+namespace db { extern std::shared_ptr<pqxx::connection> database; }
 
 User getUser(std::variant<std::int64_t, User> identificator) {
     User result;
